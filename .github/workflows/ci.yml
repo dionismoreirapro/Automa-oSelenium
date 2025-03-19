@@ -1,9 +1,10 @@
 name: CI Pipeline
 
 on:
-  pull_request:
+  push:
     branches:
-      - main
+      - main  # Altere para o nome da sua branch principal
+
 jobs:
   test:
     runs-on: ubuntu-latest
