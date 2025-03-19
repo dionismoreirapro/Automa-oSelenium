@@ -1,7 +1,9 @@
-name: CI Pipeline
+name: Selenium Java Cucumber CI
 
 on:
   push:
+    branches:
+      - main  
 
 jobs:
   test:
@@ -19,7 +21,7 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
 
-      # Passo 3: Baixar o ChromeDriver e o Chrome
+      # Passo 3: Instalar o Chrome e o ChromeDriver
       - name: Set up Chrome and ChromeDriver
         run: |
           sudo apt-get update
@@ -35,14 +37,14 @@ jobs:
       - name: Run tests with Maven
         run: mvn clean test
 
-      # Passo 5: Publicar o relatório como artefato
+      # Passo 5: Publicar o relatório HTML como artefato
       - name: Upload Cucumber HTML Report
         uses: actions/upload-artifact@v4
         with:
           name: cucumber-report
           path: target/cucumber-reports/cucumber.html
 
-      # Passo 6: Publicar o relatório JSON (opcional)
+      # Passo 6: Publicar o relatório JSON como artefato (opcional)
       - name: Upload Cucumber JSON Report
         uses: actions/upload-artifact@v4
         with:
