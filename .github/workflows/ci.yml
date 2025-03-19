@@ -13,6 +13,9 @@ jobs:
       # Passo 1: Checkout do código
       - name: Checkout code
         uses: actions/checkout@v3
+        
+      - name: Verificar instalação do ChromeDriver
+        run: which chromedriver  
 
       # Passo 2: Configurar o Java 11
       - name: Set up JDK 11
@@ -24,6 +27,10 @@ jobs:
       # Passo 3: Instalar o Chrome e o ChromeDriver automaticamente
       - name: Set up Chrome and ChromeDriver
         uses: browser-actions/setup-chrome@v1
+
+      - name: Adicionar ChromeDriver ao PATH
+        run: echo "src/test/resources/drivers/chromedriver-mac-arm64/chromedriver" >> $GITHUB_PATH
+
 
       # Passo 4: Executar os testes com Maven
       - name: Run tests with Maven
