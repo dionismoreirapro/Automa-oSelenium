@@ -28,8 +28,11 @@ jobs:
     - name: Rodar os testes
       run: mvn test
 
+    - name: Gerar relatório do Cucumber
+      run: mvn verify -Dcucumber.options="--plugin json:target/cucumber.json"
+
     - name: Fazer upload dos relatórios de teste
       uses: actions/upload-artifact@v3
       with:
-        name: relatórios-cucumber
-        path: target/cucumber-reports/*.json
+        name: relatorio-cucumber
+        path: target/cucumber.json
